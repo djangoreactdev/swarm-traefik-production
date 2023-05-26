@@ -3,6 +3,9 @@
 def gv
 
 pipeline {
+    agent {
+        label 'production'
+    }
 
     stages {
         stage("init") {
@@ -13,9 +16,7 @@ pipeline {
             }
         }
         stage("deploy") {
-            agent {
-                label 'production'
-            }
+
             steps {
                 script {
                     gv.deployApp()
