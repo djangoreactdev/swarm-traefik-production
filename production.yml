@@ -1,0 +1,28 @@
+version: "3"
+
+volumes:
+  production_traefik: {}
+
+services:
+  portfolio:
+    image: djangoreactdev/portfolio:1.0
+    # depends_on:
+    #   - postgres
+    #   - redis
+    # env_file:
+    #   - ./.envs/.production/.django
+    #   - ./.envs/.production/.postgres
+    # command: /start
+
+  traefik:
+    build:
+      context: .
+      dockerfile: ./traefik/Dockerfile
+    image: wow_feeling_production_traefik:1.0
+    depends_on:
+      - portfolio
+    volumes:
+      - production_traefik:/etc/traefik/acme
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
