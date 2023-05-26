@@ -17,6 +17,9 @@ services:
     image: djangoreactdev/codehelp:1.0
 
   traefik:
+    build:
+      context: .
+      dockerfile: ./traefik/Dockerfile
     image: production_traefik:1.0
     depends_on:
       - portfolio
