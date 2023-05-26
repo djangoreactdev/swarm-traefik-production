@@ -3,9 +3,6 @@
 def gv
 
 pipeline {
-    agent {
-        label 'developer'
-    }
 
     stages {
         stage("init") {
