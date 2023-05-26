@@ -27,7 +27,7 @@ certificatesResolvers:
 
 http:
   routers:
-    portfolio-router:
+    web-secure-router:
       rule: "Host(`solovkadmytro.pp.ua`) || Host(`www.solovkadmytro.pp.ua`)"
       entryPoints:
         - web-secure
@@ -36,36 +36,6 @@ http:
       service: portfolio
       tls:
         # https://docs.traefik.io/master/routing/routers/#certresolver
-        certResolver: letsencrypt
-
-    cosmetic-router:
-      rule: "Host(`liveisgood.pp.ua`) || Host(`www.liveisgood.pp.ua`)"
-      entryPoints:
-        - web-secure
-      middlewares:
-        - csrf
-      service: cosmetic
-      tls:
-        certResolver: letsencrypt
-
-    wow-effecting-router:
-      rule: "Host(`logod.pp.ua`) || Host(`www.logod.pp.ua`)"
-      entryPoints:
-        - web-secure
-      middlewares:
-        - csrf
-      service: wow-effecting
-      tls:
-        certResolver: letsencrypt
-
-    codehelp-router:
-      rule: "Host(`logod.pp.ua`) || Host(`www.logod.pp.ua`)"
-      entryPoints:
-        - web-secure
-      middlewares:
-        - csrf
-      service: codehelp
-      tls:
         certResolver: letsencrypt
 
   middlewares:
@@ -80,21 +50,6 @@ http:
       loadBalancer:
         servers:
           - url: http://portfolio:3000
-
-    cosmetic:
-      loadBalancer:
-        servers:
-          - url: http://cosmetic:3000
-
-    wow-effecting:
-      loadBalancer:
-        servers:
-          - url: http://wow-effecting:3000
-
-    codehelp:
-      loadBalancer:
-        servers:
-          - url: http://codehelp:3000
 
 providers:
   # https://docs.traefik.io/master/providers/file/
