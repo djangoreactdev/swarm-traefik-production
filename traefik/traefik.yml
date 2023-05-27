@@ -38,6 +38,17 @@ http:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
 
+    portfolio-router:
+      rule: "Host(`dush.solovkadmytro.pp.ua`)"
+      entryPoints:
+        - web-secure
+      middlewares:
+        - csrf
+      service: portfolio-sanity
+      tls:
+        # https://docs.traefik.io/master/routing/routers/#certresolver
+        certResolver: letsencrypt
+
     cosmetic-router:
       rule: "Host(`liveisgood.pp.ua`) || Host(`www.liveisgood.pp.ua`)"
       entryPoints:
@@ -80,6 +91,11 @@ http:
       loadBalancer:
         servers:
           - url: http://portfolio:3000
+
+    portfolio-sanity:
+      loadBalancer:
+        servers:
+          - url: http://portfolio-sanity:3333
 
     cosmetic:
       loadBalancer:

@@ -7,8 +7,8 @@ services:
   portfolio:
     image: djangoreactdev/portfolio:1.1
 
-  portfolio:
-    image: djangoreactdev/portfolio:1.1
+  portfolio-sanity:
+    image: djangoreactdev/portfolio-sanity:1.1
 
   cosmetic:
     image: djangoreactdev/cosmetic:1.0
@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: ./traefik/Dockerfile
-    image: production_traefik:1.0
+    image: production_traefik:1.1
     depends_on:
       - portfolio
     volumes:
