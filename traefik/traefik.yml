@@ -38,7 +38,7 @@ http:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
 
-    portfolio-router:
+    portfolio-sanity-router:
       rule: "Host(`dush.solovkadmytro.pp.ua`)"
       entryPoints:
         - web-secure
