@@ -2,8 +2,7 @@
 
 def deployApp() {
     echo 'deploying the application...'
-    sh 'pwd && ls'
-    sh 'docker compose -f production-build.yml build'
+    sh 'docker compose -f production-build.yml build --pull'
     sh 'docker stack rm production || true'
     // sh 'docker network rm production_default || true'
     // sh 'docker network rm production_default || true'
