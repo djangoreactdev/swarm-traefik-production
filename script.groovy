@@ -2,6 +2,7 @@
 
 def deployApp() {
     echo 'deploying the application...'
+    sh 'docker system prune'
     sh 'docker compose -f production-build.yml build --pull'
     sh 'docker stack rm production || true'
     // sh 'docker network rm production_default || true'
