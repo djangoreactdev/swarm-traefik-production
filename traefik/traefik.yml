@@ -50,7 +50,7 @@ http:
         certResolver: letsencrypt
 
     cosmetic-router:
-      rule: "Host(`liveisgood.pp.ua`) || Host(`www.liveisgood.pp.ua`)"
+      rule: "Host(`cosmeticpro.pp.ua`) || Host(`www.cosmeticpro.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -59,8 +59,19 @@ http:
       tls:
         certResolver: letsencrypt
 
+    admin-cosmetic-router:
+      rule: "Host(`admin.cosmeticpro.pp.ua`)"
+      entryPoints:
+        - web-secure
+      middlewares:
+        - csrf
+      service: cosmetic
+      tls:
+        # https://docs.traefik.io/master/routing/routers/#certresolver
+        certResolver: letsencrypt
+
     wow-effecting-router:
-      rule: "Host(`logod.pp.ua`) || Host(`www.logod.pp.ua`)"
+      rule: "Host(`liveisgood.pp.ua`) || Host(`www.liveisgood.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
