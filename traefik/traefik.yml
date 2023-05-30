@@ -81,7 +81,17 @@ http:
         certResolver: letsencrypt
 
     codehelp-router:
-      rule: "Host(`logod.pp.ua`) || Host(`www.logod.pp.ua`)"
+      rule: "Host(`my.codehelp.pp.ua`) || Host(`www.logod.pp.ua`)|| Host(`logod.pp.ua`)"
+      entryPoints:
+        - web-secure
+      middlewares:
+        - csrf
+      service: codehelp
+      tls:
+        certResolver: letsencrypt
+
+    my-codehelp-router:
+      rule: "Host(`my.codehelp.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
