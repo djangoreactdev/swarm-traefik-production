@@ -5,10 +5,10 @@ volumes:
 
 services:
   portfolio:
-    image: djangoreactdev/portfolio:1.1
+    image: djangoreactdev/portfolio:latest
 
   portfolio-sanity:
-    image: djangoreactdev/portfolio-sanity:1.1
+    image: djangoreactdev/portfolio-sanity:latest
 
   cosmetic:
     image: djangoreactdev/cosmetic:1.0
