@@ -20,7 +20,7 @@ services:
     image: djangoreactdev/codehelp:latest
 
   traefik:
-    image: production_traefik:latest
+    image: production_traefik:1.1
     depends_on:
       - portfolio
     volumes:
