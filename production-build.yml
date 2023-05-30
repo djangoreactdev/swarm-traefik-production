@@ -5,19 +5,19 @@ volumes:
 
 services:
   portfolio:
-    image: djangoreactdev/portfolio:latest
+    image: djangoreactdev/portfolio:1.1
 
   portfolio-sanity:
-    image: djangoreactdev/portfolio-sanity:latest
+    image: djangoreactdev/portfolio-sanity:1.1
 
   cosmetic:
-    image: djangoreactdev/cosmetic:latest
+    image: djangoreactdev/cosmetic:1.0
 
   wow-effecting:
-    image: djangoreactdev/wow-effecting:latest
+    image: djangoreactdev/wow-effecting:1.0
 
   codehelp:
-    image: djangoreactdev/codehelp:latest
+    image: djangoreactdev/codehelp:1.0
 
   traefik:
     build:
