@@ -50,7 +50,7 @@ http:
         certResolver: letsencrypt
 ##############################  cosmetic  ########################
     cosmetic-front-router:
-      rule: "Host(`front.cosmeticpro.pp.ua`)"
+      rule: "Host(`cosmeticpro.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
