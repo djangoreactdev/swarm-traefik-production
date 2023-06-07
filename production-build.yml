@@ -18,7 +18,7 @@ services:
 ################################Cosmetic##################################
 
   cosmetic-api:
-    image: djangoreactdev/cosmetic-api:1.0
+    image: djangoreactdev/cosmetic-api:1.0.1
     depends_on:
       - postgres
       - redis
