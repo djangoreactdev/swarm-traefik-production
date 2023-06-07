@@ -85,7 +85,7 @@ services:
 #   production_bridge:
 #     external: true
 
-# networks:
-#   default:
-#     external:
-#       name: production_default
+networks:
+  default:
+    external:
+      name: production_default
