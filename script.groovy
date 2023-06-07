@@ -42,6 +42,8 @@ def deployApp() {
         if ! docker network ls | grep -q "$NETWORK_NAME"; then
             # If the network doesn't exist, create it
             docker network create "$NETWORK_NAME"
+        fi
+            echo "Network $NETWORK_NAME exists"
         '''
 
     sh 'docker network create -d bridge --scope=swarm --attachable production_bridge || true'
