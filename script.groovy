@@ -41,7 +41,7 @@ def deployApp() {
         NETWORK_NAME="production_default"
         if ! docker network ls | grep -q "$NETWORK_NAME"; then
             # If the network doesn't exist, create it
-            docker network create "$NETWORK_NAME"
+            docker network create --driver overlay --scope swarm production_default
         fi
             echo "Network $NETWORK_NAME exists"
         '''
