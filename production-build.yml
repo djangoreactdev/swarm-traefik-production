@@ -42,7 +42,7 @@ services:
     build:
       context: ./cosmetic
       dockerfile: ./compose/production/aws/Dockerfile
-    image: awscli
+    image: cosmetic_production_awscli
     env_file:
       - ./cosmetic/.envs/.production/.django
     volumes:
@@ -53,11 +53,7 @@ services:
 
   cosmetic-front:
     image: djangoreactdev/cosmetic-front:1.0
-    # volumes:
-    #   - ./front-next:/app
     command: npm start
-    ports:
-      - "3000:3000"
     depends_on:
       - cosmetic-api
     environment:
@@ -66,11 +62,7 @@ services:
 
   cosmetic-dashboard:
     image: djangoreactdev/cosmetic-dashboard:1.0
-    # volumes:
-    #   - ./dashboard-next:/app
     command: npm start
-    ports:
-      - "9000:9000"
     depends_on:
       - cosmetic-api
     environment:

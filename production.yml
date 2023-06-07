@@ -28,9 +28,6 @@ services:
     command: /start
 
   postgres:
-    # build:
-    #   context: .
-    #   dockerfile: ./compose/production/postgres/Dockerfile
     image: cosmetic_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
@@ -42,7 +39,7 @@ services:
     image: redis:6
 
   awscli:
-    image: awscli
+    image: cosmetic_production_awscli
     env_file:
       - ./cosmetic/.envs/.production/.django
     volumes:
@@ -50,11 +47,7 @@ services:
 
   cosmetic-front:
     image: djangoreactdev/cosmetic-front:1.0
-    # volumes:
-    #   - ./front-next:/app
     command: npm start
-    ports:
-      - "3000:3000"
     depends_on:
       - cosmetic-api
     environment:
@@ -63,11 +56,7 @@ services:
 
   cosmetic-dashboard:
     image: djangoreactdev/cosmetic-dashboard:1.0
-    # volumes:
-    #   - ./dashboard-next:/app
     command: npm start
-    ports:
-      - "9000:3000"
     depends_on:
       - cosmetic-api
     environment:

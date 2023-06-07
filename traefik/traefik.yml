@@ -147,6 +147,23 @@ http:
         servers:
           - url: http://codehelp:3000
 
+##############################  cosmetic  ########################
+
+    cosmetic-dashboard:
+      loadBalancer:
+        servers:
+          - url: http://cosmetic-dashboard:3000
+
+    cosmetic-api:
+      loadBalancer:
+        servers:
+          - url: http://cosmetic-api:5000
+
+    cosmetic-front:
+      loadBalancer:
+        servers:
+          - url: http://cosmetic-front:3000
+
 providers:
   # https://docs.traefik.io/master/providers/file/
   file:
