@@ -44,6 +44,9 @@ services:
       - ./cosmetic/.envs/.production/.django
     volumes:
       - production_postgres_data_backups:/backups:z
+    networks:
+      - production_bridge
+      - default
 
   cosmetic-front:
     image: djangoreactdev/cosmetic-front:1.0
@@ -82,7 +85,7 @@ services:
 networks:
   production_bridge:
     external: true
-    
+
 networks:
   default:
     external:

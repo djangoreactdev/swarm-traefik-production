@@ -28,13 +28,9 @@ def deployApp() {
 
         sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
         sh 'docker compose -f production-build.yml build --pull'
-        // sh 'docker compose -f production-build.yml build'
     }
 
-    // sh 'docker compose -f production-build.yml build --pull'
     sh 'docker stack rm production || true'
-    // sh 'docker network rm production_default || true'
-    // sh 'docker network create -d bridge production_default || true'
     sh '''
         #!/bin/bash
 
