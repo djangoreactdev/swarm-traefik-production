@@ -27,8 +27,8 @@ def deployApp() {
     withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 
         sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
-        sh 'docker compose -f production-build.yml pull'
-        sh 'docker compose -f production-build.yml build'
+        sh 'docker compose -f production-build.yml pull --build'
+        // sh 'docker compose -f production-build.yml build'
     }
 
     // sh 'docker compose -f production-build.yml build --pull'
