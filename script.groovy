@@ -35,6 +35,15 @@ def deployApp() {
     sh 'docker stack rm production || true'
     // sh 'docker network rm production_default || true'
     // sh 'docker network create -d bridge production_default || true'
+    sh '''
+        #!/bin/bash
+
+        NETWORK_NAME="production_default"
+        if ! docker network ls | grep -q "$NETWORK_NAME"; then
+            # If the network doesn't exist, create it
+            docker network create "$NETWORK_NAME"
+        '''
+
     sh 'docker network create -d bridge --scope=swarm --attachable production_bridge || true'
     sh 'docker stack deploy -c production.yml production'
 
