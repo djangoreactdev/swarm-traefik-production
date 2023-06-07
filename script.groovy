@@ -45,7 +45,7 @@ def deployApp() {
             echo "Network $NETWORK_NAME exists"
         '''
 
-    sh 'docker network create -d bridge --scope=swarm --attachable production_bridge || true'
+    // sh 'docker network create -d bridge --scope=swarm --attachable production_bridge || true'
     sh 'docker stack deploy -c production.yml production'
 
 } 
