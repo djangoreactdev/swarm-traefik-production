@@ -34,9 +34,10 @@ def deployApp() {
     // sh 'docker compose -f production-build.yml build --pull'
     sh 'docker stack rm production || true'
     // sh 'docker network rm production_default || true'
-    sh 'docker network create -d bridge production_default || true'
-    sh 'docker network create -d overlay --scope=swarm --attachable production_default || true'
-    sh 'docker stack deploy -c production.yml production'
+    // sh 'docker network create -d bridge production_default || true'
+    sh 'docker network create -d bridge --scope=swarm --attachable production_bridge || true'
+    // sh 'docker stack deploy -c production.yml production'
+    sh 'docker stack deploy -c production.yml --attachable --network production_bridge production'
 } 
 
 return this
