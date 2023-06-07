@@ -36,8 +36,8 @@ def deployApp() {
     // sh 'docker network rm production_default || true'
     // sh 'docker network create -d bridge production_default || true'
     sh 'docker network create -d bridge --scope=swarm --attachable production_bridge || true'
-    // sh 'docker stack deploy -c production.yml production'
-    sh 'docker stack deploy -c production.yml --attachable --network production_bridge production'
+    sh 'docker stack deploy -c production.yml production'
+
 } 
 
 return this
