@@ -1,0 +1,91 @@
+version: '3'
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+  production_traefik: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: cosmetic-api:1.0
+    container_name: cosmetic-api
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: cosmetic_production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
+
+  traefik:
+    build:
+      context: .
+      dockerfile: ./compose/production/traefik/Dockerfile
+    image: cosmetic_production_traefik
+    depends_on:
+      - django
+    volumes:
+      - production_traefik:/etc/traefik/acme
+    ports:
+      - '0.0.0.0:80:80'
+      - '0.0.0.0:443:443'
+
+  redis:
+    image: redis:6
+
+  awscli:
+    build:
+      context: .
+      dockerfile: ./compose/production/aws/Dockerfile
+    env_file:
+      - ./.envs/.production/.django
+    volumes:
+      - production_postgres_data_backups:/backups:z
+
+  cosmetic-front:
+    build:
+      context: ./front-next
+      target: runner
+    image: cosmetic-front:1.0
+    container_name: cosmetic-front
+    volumes:
+      - ./front-next:/app
+    command: npm start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - django
+    environment:
+      NODE_ENV: production
+    # user: root
+
+  cosmetic-dashboard:
+    build:
+      context: ./dashboard-next
+      target: runner
+    image: cosmetic-dashboard:1.0
+    container_name: cosmetic-dashboard
+    volumes:
+      - ./dashboard-next:/app
+    command: npm start
+    ports:
+      - "9000:9000"
+    depends_on:
+      - django
+    environment:
+      NODE_ENV: production
+    # user: root

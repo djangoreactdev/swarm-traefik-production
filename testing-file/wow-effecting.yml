@@ -1,0 +1,4 @@
+version: "3"
+
+  wow-effecting:
+    image: djangoreactdev/wow-effecting:1.0

@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  portfolio:
+    image: djangoreactdev/portfolio:1.3
+
+  portfolio-sanity:
+    image: djangoreactdev/portfolio-sanity:1.3

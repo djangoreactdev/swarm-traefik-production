@@ -1,6 +1,8 @@
 version: "3"
 
 volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
   production_traefik: {}
 
 services:
@@ -10,14 +12,73 @@ services:
   portfolio-sanity:
     image: djangoreactdev/portfolio-sanity:1.3
 
-  cosmetic:
-    image: djangoreactdev/cosmetic:1.0
-
   wow-effecting:
     image: djangoreactdev/wow-effecting:1.0
 
-  codehelp:
-    image: djangoreactdev/codehelp:1.0
+################################Cosmetic##################################
+
+  cosmetic-api:
+    image: djangoreactdev/cosmetic-api:1.0
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./cosmetic/.envs/.production/.django
+      - ./cosmetic/.envs/.production/.postgres
+    command: /start
+
+  postgres:
+    # build:
+    #   context: .
+    #   dockerfile: ./compose/production/postgres/Dockerfile
+    image: cosmetic_production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./cosmetic/.envs/.production/.postgres
+
+  redis:
+    image: redis:6
+
+  awscli:
+    image: awscli
+    env_file:
+      - ./cosmetic/.envs/.production/.django
+    volumes:
+      - production_postgres_data_backups:/backups:z
+
+  cosmetic-front:
+    image: djangoreactdev/cosmetic-front:1.0
+    # volumes:
+    #   - ./front-next:/app
+    command: npm start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - cosmetic-api
+    environment:
+      NODE_ENV: production
+    # user: root
+
+  cosmetic-dashboard:
+    image: djangoreactdev/cosmetic-dashboard:1.0
+    # volumes:
+    #   - ./dashboard-next:/app
+    command: npm start
+    ports:
+      - "9000:3000"
+    depends_on:
+      - cosmetic-api
+    environment:
+      NODE_ENV: production
+    # user: root
+
+################################Codehelp##################################
+
+
+
+
 
   traefik:
     image: production_traefik:1.1
