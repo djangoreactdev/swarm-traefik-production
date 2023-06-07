@@ -2,6 +2,7 @@
 
 def deployApp() {
     echo 'deploying the application...'
+    sh 'docker stack rm production || true'
     sh 'docker system prune -f'
     // sh 'docker pull djangoreactdev/portfolio:1.3'
     // sh 'docker pull djangoreactdev/portfolio-sanity:1.3'
@@ -30,7 +31,7 @@ def deployApp() {
         sh 'docker compose -f production-build.yml build --pull'
     }
 
-    sh 'docker stack rm production || true'
+    
     sh '''
         #!/bin/bash
 
