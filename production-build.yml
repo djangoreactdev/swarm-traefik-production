@@ -52,7 +52,7 @@ services:
     image: redis:6
 
   cosmetic-front:
-    image: cosmetic-front:1.0
+    image: djangoreactdev/cosmetic-front:1.0
     # volumes:
     #   - ./front-next:/app
     command: npm start
@@ -65,7 +65,7 @@ services:
     # user: root
 
   cosmetic-dashboard:
-    image: cosmetic-dashboard:1.0
+    image: djangoreactdev/cosmetic-dashboard:1.0
     # volumes:
     #   - ./dashboard-next:/app
     command: npm start
