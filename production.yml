@@ -80,7 +80,6 @@ services:
 
   codehelp-front:
     image: djangoreactdev/codehelp-front:1.0
-    command: npm start
     depends_on:
       - codehelp-api
     environment:
