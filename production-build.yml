@@ -88,6 +88,7 @@ services:
       - codehelp-api
     environment:
       NODE_ENV: production
+      REACT_APP_BASE_API: http://codehelp-api:5000
     # user: root
 
   traefik:

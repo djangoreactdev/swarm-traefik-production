@@ -48,7 +48,9 @@ http:
       tls:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
+
 ##############################  cosmetic  ########################
+
     cosmetic-front-router:
       rule: "Host(`cosmeticpro.pp.ua`)"
       entryPoints:
@@ -95,7 +97,7 @@ http:
         certResolver: letsencrypt
 
     codehelp-api-router:
-      rule: "Host(`api.codehelp.pp.ua`)"
+      rule: "Host(`api.codehelp.pp.ua`) || Host(`api.logod.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -143,6 +145,7 @@ http:
       loadBalancer:
         servers:
           - url: http://codehelp-front:3000
+
 
 ############################## end codehelp  ########################
 
