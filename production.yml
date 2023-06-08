@@ -34,7 +34,8 @@ services:
       - production_postgres_data_backups:/backups
     env_file:
       - ./cosmetic/.envs/.production/.postgres
-
+      - ./codehelp/.envs/.production/.postgres
+      
   redis:
     image: redis:6
 
@@ -76,7 +77,7 @@ services:
     env_file:
       - ./codehelp/.envs/.production/.django
       - ./codehelp/.envs/.production/.postgres
-    command: /codehelp/compose/production/django/start
+    command: /start
 
   codehelp-front:
     image: djangoreactdev/codehelp-front:1.0
