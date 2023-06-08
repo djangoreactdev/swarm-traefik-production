@@ -42,5 +42,6 @@ while True:
 END
 
 >&2 echo 'PostgreSQL is available'
+>&2 pwd && ls -la
 
 exec "$@"
