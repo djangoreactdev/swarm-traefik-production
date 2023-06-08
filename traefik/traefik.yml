@@ -95,7 +95,7 @@ http:
         certResolver: letsencrypt
 
     codehelp-api-router:
-      rule: "Host(`my.codehelp.pp.ua`)"
+      rule: "Host(`api.codehelp.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:

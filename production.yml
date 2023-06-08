@@ -70,7 +70,6 @@ services:
 
 
   codehelp-api:
-    container_name: codehelp-api
     image: djangoreactdev/codehelp-api:1.0
     depends_on:
       - postgres
