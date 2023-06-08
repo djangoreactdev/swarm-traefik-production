@@ -37,6 +37,7 @@ services:
       - production_postgres_data_backups:/backups
     env_file:
       - ./cosmetic/.envs/.production/.postgres
+      - ./codehelp/.envs/.production/.postgres
 
   awscli:
     build:
@@ -71,6 +72,24 @@ services:
 
 ################################Codehelp##################################
 
+  codehelp-api:
+    container_name: codehelp-api
+    image: djangoreactdev/codehelp-api:1.0
+    depends_on:
+      - postgres
+    env_file:
+      - ./codehelp/.envs/.production/.django
+      - ./codehelp/.envs/.production/.postgres
+    command: /codehelp/compose/production/django/start
+
+  codehelp-front:
+    image: djangoreactdev/codehelp-front:1.0
+    command: npm start
+    depends_on:
+      - codehelp-api
+    environment:
+      NODE_ENV: production
+    # user: root
 
   traefik:
     build:

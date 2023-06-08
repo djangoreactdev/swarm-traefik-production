@@ -94,23 +94,23 @@ http:
       tls:
         certResolver: letsencrypt
 
-    codehelp-router:
+    codehelp-api-router:
       rule: "Host(`my.codehelp.pp.ua`) || Host(`www.logod.pp.ua`)|| Host(`logod.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
         - csrf
-      service: codehelp
+      service: codehelp-api
       tls:
         certResolver: letsencrypt
 
-    my-codehelp-router:
+    codehelp-front-router:
       rule: "Host(`my.codehelp.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
         - csrf
-      service: codehelp
+      service: codehelp-front
       tls:
         certResolver: letsencrypt
 
@@ -132,20 +132,25 @@ http:
         servers:
           - url: http://portfolio-sanity:3333
 
-    cosmetic:
+############################## codehelp ########################
+
+    codehelp-api:
       loadBalancer:
         servers:
-          - url: http://cosmetic:3000
+          - url: http://codehelp-api:5000
+
+    codehelp-front:
+      loadBalancer:
+        servers:
+          - url: http://codehelp-front:3000
+
+############################## end codehelp  ########################
 
     wow-effecting:
       loadBalancer:
         servers:
           - url: http://wow-effecting:3000
 
-    codehelp:
-      loadBalancer:
-        servers:
-          - url: http://codehelp:3000
 
 ##############################  cosmetic  ########################
 
@@ -163,6 +168,8 @@ http:
       loadBalancer:
         servers:
           - url: http://cosmetic-front:3000
+
+############################## end cosmetic  ########################
 
 providers:
   # https://docs.traefik.io/master/providers/file/
