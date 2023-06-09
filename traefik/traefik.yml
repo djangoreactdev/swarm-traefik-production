@@ -100,8 +100,8 @@ http:
       rule: "Host(`api.codehelp.pp.ua`) || Host(`api.logod.pp.ua`)"
       entryPoints:
         - web-secure
-      middlewares:
-        - csrf
+      # middlewares:
+      #   - csrf
       service: codehelp-api
       tls:
         certResolver: letsencrypt
@@ -110,8 +110,8 @@ http:
       rule: "Host(`www.logod.pp.ua`)|| Host(`logod.pp.ua`)"
       entryPoints:
         - web-secure
-      middlewares:
-        - csrf
+      # middlewares:
+      #   - csrf
       service: codehelp-front
       tls:
         certResolver: letsencrypt
