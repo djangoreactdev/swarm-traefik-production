@@ -143,7 +143,7 @@ http:
     codehelp-api:
       loadBalancer:
         servers:
-          - url: http://codehelp-api:5000
+          - url: http://codehelp-api:8000
 
     codehelp-front:
       loadBalancer:
