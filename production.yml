@@ -5,6 +5,10 @@ volumes:
   production_postgres_data_backups: {}
   production_traefik: {}
 
+  codehelp_django_media: {}
+  codehelp_django_static: {}
+  codehelp_client_static: {}
+
 services:
   portfolio:
     image: djangoreactdev/portfolio:1.3
@@ -15,17 +19,6 @@ services:
   wow-effecting:
     image: djangoreactdev/wow-effecting:1.0
 
-################################Cosmetic##################################
-
-  cosmetic-api:
-    image: djangoreactdev/cosmetic-api:1.0.2
-    depends_on:
-      - postgres
-      - redis
-    env_file:
-      - ./cosmetic/.envs/.production/.django
-      - ./cosmetic/.envs/.production/.postgres
-    command: /start
 
   postgres:
     image: cosmetic_production_postgres
@@ -38,6 +31,18 @@ services:
       
   redis:
     image: redis:6
+
+################################Cosmetic##################################
+
+  cosmetic-api:
+    image: djangoreactdev/cosmetic-api:1.0.2
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./cosmetic/.envs/.production/.django
+      - ./cosmetic/.envs/.production/.postgres
+    command: /start
 
   awscli:
     image: cosmetic_production_awscli
@@ -70,22 +75,40 @@ services:
 
 
   codehelp-api:
-    image: djangoreactdev/codehelp-api:1.0
+    image: djangoreactdev/codehelp-api:1.0.0
     depends_on:
       - postgres
     env_file:
       - ./codehelp/.envs/.production/.django
       - ./codehelp/.envs/.production/.postgres
+    volumes:
+      - codehelp_django_media:/app/codehelp/media
     command: /start
 
+  celeryworker:
+    <<: *codehelp-api
+    image: djangoreactdev/codehelp-api:1.0.0
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *codehelp-api
+    image: djangoreactdev/codehelp-api:1.0.0
+    command: /start-celerybeat
+
+  flower:
+    <<: *codehelp-api
+    image: djangoreactdev/codehelp-api:1.0.0
+    command: /start-flower
+
   codehelp-front:
-    image: djangoreactdev/codehelp-front:1.0
+    image: djangoreactdev/codehelp-front:1.0.0
+    restart: unless-stopped
+    volumes:
+        - codehelp_django_media:/usr/share/nginx/media:ro
+        - codehelp_django_static:/usr/share/nginx/static:ro
+        - codehelp_client_static:/usr/share/nginx/html:ro
     depends_on:
       - codehelp-api
-    environment:
-      NODE_ENV: production
-      REACT_APP_BASE_API: https://codehelp-api:5000
-    # user: root
 
 
   traefik:
@@ -98,9 +121,6 @@ services:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
 
-# networks:
-#   production_bridge:
-#     external: true
 
 networks:
   default:

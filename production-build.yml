@@ -74,7 +74,7 @@ services:
 
   codehelp-api:
     container_name: codehelp-api
-    image: djangoreactdev/codehelp-api:1.0
+    image: djangoreactdev/codehelp-api:1.0.0
     depends_on:
       - postgres
     env_file:
@@ -83,7 +83,7 @@ services:
     command: /codehelp/compose/production/django/start
 
   codehelp-front:
-    image: djangoreactdev/codehelp-front:1.0
+    image: djangoreactdev/codehelp-front:1.0.0
     depends_on:
       - codehelp-api
     environment:
