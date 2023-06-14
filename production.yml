@@ -85,16 +85,15 @@ services:
       - codehelp_django_media:/app/codehelp/media
     command: /start
 
-  celeryworker:
+  codehelp-celeryworker:
     image: djangoreactdev/codehelp-api:1.0.0
     command: /start-celeryworker
 
-  celerybeat:
-
+  codehelp-celerybeat:
     image: djangoreactdev/codehelp-api:1.0.0
     command: /start-celerybeat
 
-  flower:
+  codehelp-flower:
     image: djangoreactdev/codehelp-api:1.0.0
     command: /start-flower
 
