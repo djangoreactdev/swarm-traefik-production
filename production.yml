@@ -89,18 +89,24 @@ services:
     image: djangoreactdev/codehelp-api:1.0.0
     depends_on:
       - codehelp-api
+    env_file:
+      - ./codehelp/.envs/.production/.django
     command: /start-celeryworker
 
   codehelp-celerybeat:
     image: djangoreactdev/codehelp-api:1.0.0
     depends_on:
       - codehelp-api
+    env_file:
+      - ./codehelp/.envs/.production/.django
     command: /start-celerybeat
 
   codehelp-flower:
     image: djangoreactdev/codehelp-api:1.0.0
     depends_on:
       - codehelp-api
+    env_file:
+      - ./codehelp/.envs/.production/.django
     command: /start-flower
 
   codehelp-front:
