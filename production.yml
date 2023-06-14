@@ -74,7 +74,7 @@ services:
 ################################Codehelp##################################
 
 
-  codehelp-api:
+  codehelp-api: &codehelp-api
     image: djangoreactdev/codehelp-api:1.0.0
     depends_on:
       - postgres
@@ -86,7 +86,7 @@ services:
     command: /start
 
   codehelp-celeryworker:
-    image: djangoreactdev/codehelp-api:1.0.0
+    <<: *codehelp-api
     depends_on:
       - codehelp-api
     env_file:
@@ -95,7 +95,7 @@ services:
     command: /start-celeryworker
 
   codehelp-celerybeat:
-    image: djangoreactdev/codehelp-api:1.0.0
+    <<: *codehelp-api
     depends_on:
       - codehelp-api
     env_file:
@@ -104,7 +104,7 @@ services:
     command: /start-celerybeat
 
   codehelp-flower:
-    image: djangoreactdev/codehelp-api:1.0.0
+    <<: *codehelp-api
     depends_on:
       - codehelp-api
     env_file:
