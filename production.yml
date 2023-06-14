@@ -87,14 +87,20 @@ services:
 
   codehelp-celeryworker:
     image: djangoreactdev/codehelp-api:1.0.0
+    depends_on:
+      - codehelp-api
     command: /start-celeryworker
 
   codehelp-celerybeat:
     image: djangoreactdev/codehelp-api:1.0.0
+    depends_on:
+      - codehelp-api
     command: /start-celerybeat
 
   codehelp-flower:
     image: djangoreactdev/codehelp-api:1.0.0
+    depends_on:
+      - codehelp-api
     command: /start-flower
 
   codehelp-front:
