@@ -86,17 +86,15 @@ services:
     command: /start
 
   celeryworker:
-    <<: *codehelp-api
     image: djangoreactdev/codehelp-api:1.0.0
     command: /start-celeryworker
 
   celerybeat:
-    <<: *codehelp-api
+
     image: djangoreactdev/codehelp-api:1.0.0
     command: /start-celerybeat
 
   flower:
-    <<: *codehelp-api
     image: djangoreactdev/codehelp-api:1.0.0
     command: /start-flower
 
