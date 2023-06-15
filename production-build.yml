@@ -93,9 +93,9 @@ services:
     volumes:
         - ./client:/app
         - /app/node_modules
-        - production_django_media:/usr/share/nginx/media:ro
-        - production_django_static:/usr/share/nginx/static:ro
-        - production_client_static:/usr/share/nginx/html:ro
+        - codehelp_django_media:/usr/share/nginx/media:ro
+        - codehelp_django_static:/usr/share/nginx/static:ro
+        - codehelp_client_static:/usr/share/nginx/html:ro
     depends_on:
       - codehelp-api
 
