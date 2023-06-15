@@ -5,6 +5,10 @@ volumes:
   production_postgres_data_backups: {}
   production_traefik: {}
 
+  codehelp_django_media: {}
+  codehelp_django_static: {}
+  codehelp_client_static: {}
+
 services:
   portfolio:
     image: djangoreactdev/portfolio:1.3
@@ -75,6 +79,8 @@ services:
   codehelp-api:
     container_name: codehelp-api
     image: djangoreactdev/codehelp-api:1.0.0
+    volumes:
+      - production_django_media:/app/codehelp/media
     depends_on:
       - postgres
     env_file:
@@ -84,6 +90,12 @@ services:
 
   codehelp-front:
     image: djangoreactdev/codehelp-front:1.0.1
+    volumes:
+        - ./client:/app
+        - /app/node_modules
+        - production_django_media:/usr/share/nginx/media:ro
+        - production_django_static:/usr/share/nginx/static:ro
+        - production_client_static:/usr/share/nginx/html:ro
     depends_on:
       - codehelp-api
 
