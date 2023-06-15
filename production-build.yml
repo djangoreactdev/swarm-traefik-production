@@ -83,13 +83,10 @@ services:
     command: /codehelp/compose/production/django/start
 
   codehelp-front:
-    image: djangoreactdev/codehelp-front:1.0.0
+    image: djangoreactdev/codehelp-front:1.0.1
     depends_on:
       - codehelp-api
-    environment:
-      NODE_ENV: production
-      REACT_APP_BASE_API: https://codehelp-api:5000
-    # user: root
+
 
   traefik:
     build:
