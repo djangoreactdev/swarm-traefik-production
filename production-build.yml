@@ -80,7 +80,7 @@ services:
     container_name: codehelp-api
     image: djangoreactdev/codehelp-api:1.0.0
     volumes:
-      - production_django_media:/app/codehelp/media
+      - codehelp_django_media:/app/codehelp/media
     depends_on:
       - postgres
     env_file:
