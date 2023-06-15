@@ -75,7 +75,7 @@ services:
 
 
   codehelp-api: &codehelp-api
-    image: djangoreactdev/codehelp-api:1.0.0
+    image: djangoreactdev/codehelp-api:1.0.1
     depends_on:
       - postgres
     env_file:
