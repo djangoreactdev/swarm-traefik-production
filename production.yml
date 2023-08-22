@@ -9,6 +9,8 @@ volumes:
   codehelp_django_static: {}
   codehelp_client_static: {}
 
+  cosmetic_django_media: {}
+
 services:
   portfolio:
     image: djangoreactdev/portfolio:1.3
@@ -44,6 +46,21 @@ services:
       - ./cosmetic/.envs/.production/.postgres
     command: /start
 
+  cosmetic-celeryworker:
+    <<: *django
+    image: cosmeticpro_production_celeryworker
+    command: /start-celeryworker
+
+  cosmetic-celerybeat:
+    <<: *django
+    image: cosmeticpro_production_celerybeat
+    command: /start-celerybeat
+
+  cosmetic-flower:
+    <<: *django
+    image: cosmeticpro_production_flower
+    command: /start-flower
+
   awscli:
     image: cosmetic_production_awscli
     env_file:
@@ -70,6 +87,16 @@ services:
     environment:
       NODE_ENV: production
     # user: root
+
+  cosmetic-nginx:
+    image: cosmetic_local_nginx
+    depends_on:
+      - cosmetic-api
+    volumes:
+      - cosmetic_django_media:/usr/share/nginx/media:ro
+    ports:
+        - "3000:3000"
+        - "4000:4000"
 
 ################################Codehelp##################################
 
