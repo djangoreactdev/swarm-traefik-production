@@ -49,10 +49,10 @@ http:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
 
-##############################  cosmetic  ########################
+    ##############################  cosmetic  ########################
 
     cosmetic-front-router:
-      rule: "Host(`cosmeticpro.pp.ua`)"
+      rule: "Host(`cosmeticpro.pp.ua`) || Host(`www.solovkaskincare.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -62,7 +62,7 @@ http:
         certResolver: letsencrypt
 
     cosmetic-api-router:
-      rule: "Host(`api.cosmeticpro.pp.ua`)"
+      rule: "Host(`api.cosmeticpro.pp.ua`) || Host(`www.api.cosmeticpro.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -73,7 +73,7 @@ http:
         certResolver: letsencrypt
 
     cosmetic-dashboard-router:
-      rule: "Host(`dashboard.cosmeticpro.pp.ua`)"
+      rule: "Host(`dashboard.cosmeticpro.pp.ua`) || Host(`www.dashboard.cosmeticpro.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -83,8 +83,7 @@ http:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
 
-###################### end cosmetic ########################
-
+    ###################### end cosmetic ########################
 
     wow-effecting-router:
       rule: "Host(`liveisgood.pp.ua`) || Host(`www.liveisgood.pp.ua`)"
@@ -96,10 +95,10 @@ http:
       tls:
         certResolver: letsencrypt
 
-###################### codehelp ########################
+    ###################### codehelp ########################
 
     codehelp-api-router:
-      rule: "Host(`api.codehelp.pp.ua`) || Host(`api.logod.pp.ua`)"
+      rule: "Host(`api.codehelp.pp.ua`) || Host(`api.laba.pp.ua`)"
       entryPoints:
         - web-secure
       # middlewares:
@@ -109,7 +108,7 @@ http:
         certResolver: letsencrypt
 
     codehelp-front-router:
-      rule: "Host(`www.logod.pp.ua`)|| Host(`logod.pp.ua`)"
+      rule: "Host(`www.laba.pp.ua`)|| Host(`laba.pp.ua`)"
       entryPoints:
         - web-secure
       # middlewares:
@@ -118,7 +117,7 @@ http:
       tls:
         certResolver: letsencrypt
 
-###################### codehelp ########################
+  ###################### codehelp ########################
 
   middlewares:
     csrf:
@@ -138,7 +137,7 @@ http:
         servers:
           - url: http://portfolio-sanity:3333
 
-############################## codehelp ########################
+    ############################## codehelp ########################
 
     codehelp-api:
       loadBalancer:
@@ -150,16 +149,14 @@ http:
         servers:
           - url: http://codehelp-front:3000
 
-
-############################## end codehelp  ########################
+    ############################## end codehelp  ########################
 
     wow-effecting:
       loadBalancer:
         servers:
           - url: http://wow-effecting:3000
 
-
-##############################  cosmetic  ########################
+    ##############################  cosmetic  ########################
 
     cosmetic-dashboard:
       loadBalancer:
