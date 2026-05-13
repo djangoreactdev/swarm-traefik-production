@@ -52,7 +52,7 @@ http:
     ##############################  cosmetic  ########################
 
     cosmetic-front-router:
-      rule: "Host(`cosmeticpro.pp.ua`) || Host(`www.solovkaskincare.pp.ua`)"
+      rule: "Host(`cosmeticpro.pp.ua`) || Host(`www.cosmeticpro.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -86,7 +86,7 @@ http:
     ###################### end cosmetic ########################
 
     wow-effecting-router:
-      rule: "Host(`liveisgood.pp.ua`) || Host(`www.liveisgood.pp.ua`)"
+      rule: "Host(`solovkaskincare.pp.ua`) || Host(`www.solovkaskincare.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -98,7 +98,7 @@ http:
     ###################### codehelp ########################
 
     codehelp-api-router:
-      rule: "Host(`api.codehelp.pp.ua`) || Host(`api.laba.pp.ua`)"
+      rule: "Host(`api.codehelp.pp.ua`) || Host(`api.codehelp.pp.ua`)"
       entryPoints:
         - web-secure
       # middlewares:
@@ -108,7 +108,7 @@ http:
         certResolver: letsencrypt
 
     codehelp-front-router:
-      rule: "Host(`www.laba.pp.ua`)|| Host(`laba.pp.ua`)"
+      rule: "Host(`www.codehelp.pp.ua`)|| Host(`codehelp.pp.ua`)"
       entryPoints:
         - web-secure
       # middlewares:
