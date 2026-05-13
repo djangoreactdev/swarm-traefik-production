@@ -50,6 +50,7 @@ echo "${b64_cosmetic_django}" | base64 -d > "$DEPLOY_DIR/cosmetic/.envs/.product
 chmod 600 "$DEPLOY_DIR/cosmetic/.envs/.production/.django"
 echo "${b64_codehelp_django}" | base64 -d > "$DEPLOY_DIR/codehelp/.envs/.production/.django"
 chmod 600 "$DEPLOY_DIR/codehelp/.envs/.production/.django"
+chown -R ubuntu:ubuntu "$DEPLOY_DIR"
 
 cd "$DEPLOY_DIR"
 

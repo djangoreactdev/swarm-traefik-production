@@ -9,6 +9,8 @@ volumes:
   codehelp_django_static: {}
   codehelp_client_static: {}
 
+  cosmetic_django_media: {}
+
 services:
   portfolio:
     image: djangoreactdev/portfolio:1.3
