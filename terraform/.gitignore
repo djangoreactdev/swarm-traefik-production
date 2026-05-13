@@ -12,3 +12,4 @@ override.tf.json
 
 # Auto-generated EC2 SSH private key (see README)
 ec2_auto_key.pem
+env.example

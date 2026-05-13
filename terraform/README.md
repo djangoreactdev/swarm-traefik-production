@@ -30,9 +30,21 @@ terraform apply
 `terraform.tfvars` is auto-loaded by Terraform, so no `-var` flags are needed. The shipped `env.example` is already filled with working values for this repo (`deploy_git_repo`, `deploy_git_branch=master`, `swap_size_gb=6`, etc.) - copying it as-is is enough for a first apply. Edit `terraform.tfvars` to override any value, including the four `env_*` blocks for real production secrets. The file is gitignored.
 
 - **`terraform plan`** should not ask for `ssh_public_key` if you use the default (empty string): a key pair is generated automatically.
-- After **`terraform apply`**, if the key was auto-generated, the private key is written to **`ec2_auto_key.pem`** in this same directory (ignored by Git). Permission is set to `0600` where the provider supports it.
+- After **`terraform apply`**, if the key was auto-generated, the private key is written to **`ec2_auto_key.pem`** in this same directory (ignored by Git). Permission is set to `0600` where the provider supports it. On **Windows**, OpenSSH still rejects the key if inherited ACLs allow `BUILTIN\Users` (or other principals) to read the file; run the **icacls** commands below once after each apply that recreates the key.
 
-Connect (user **`ubuntu`** on the Ubuntu AMI):
+### Windows: fix `UNPROTECTED PRIVATE KEY FILE` / `Bad permissions`
+
+From PowerShell (replace the path if you changed `ssh_generated_private_key_filename`):
+
+```powershell
+$key = "C:\shere-folder\swarm-traefik-production\terraform\ec2_auto_key.pem"
+icacls $key /inheritance:r
+icacls $key /grant:r "$($env:USERNAME):R"
+```
+
+Then retry SSH or Cursor Remote-SSH. Only your user account should remain on the ACL (read).
+
+### Connect (user `ubuntu` on the Ubuntu AMI)
 
 ```powershell
 terraform output ssh_command
